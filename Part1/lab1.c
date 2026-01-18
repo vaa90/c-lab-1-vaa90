@@ -108,6 +108,7 @@ void part2() {
 
   // Q2.1: What happens if the second argument is greater
   // than the size of the array (10)?
+  // Ans: then the function will access undefined memory
   fillArray(array, 10);
 
   int value = 295;
@@ -121,6 +122,7 @@ void part2() {
   // as if it were an array of a single element. What data
   // is stored in value after the following code executes?
   // Explain why the result is what it is.
+  // Ans: value == 2 bbecause the loop only executes once preventing the access of undefined memory
   fillArray(&value, 1);
 }
 
@@ -184,7 +186,7 @@ void part3() {
   // Order of operations can be confusing, so parentheses
   // generally improve readability.
 
-  // assert( student == 8 );
+  assert(*((int*)&student+ 2) == 8 );
 }
 
 // HELPER FUNCTION - bigArrayIndex()
@@ -220,9 +222,10 @@ void part4() {
   // Q4.1: Try changing the order of the loops (switch the
   // "for" lines). The original ordering below is
   // considered "ijk".  Which loop orderings are fastest?
-  for (int i = 0; i < SIZE; i++) {
-    for (int j = 0; j < SIZE; j++) {
-      for (int k = 0; k < SIZE; k++) {
+  // Ans: (ijk)=693797, (j,i,k)=556523, (kij)=1500782
+  for (int k = 0; k < SIZE; k++) {
+    for (int i = 0; i < SIZE; i++) {
+      for (int j = 0; j < SIZE; j++) {
         bigArray[bigArrayIndex(i, j, k)] = i + j + k;
       }
     }
